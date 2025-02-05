@@ -1,0 +1,7 @@
+sbcl
+(CAR (CDR (CDR '(a b x d))))
+(CAR (CAR (CDR (CAR (CDR '(a (b (x d)))))))))
+(CAR (CAR (CDR (CAR (CDR (CAR (CAR '(((a (b (x) d)))))))))))
+(cons 'a (cons 'b (cons 'x (cons 'd nil))))
+(cons 'a (cons (cons 'b (cons (cons 'x (cons 'd nil)) nil)) nil))
+(cons (cons (cons 'a (cons (cons 'b (cons (cons 'x nil) 'd)) nil)) nil) nil)
