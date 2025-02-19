@@ -1,0 +1,54 @@
+Script started on 2025-02-19 01:28:12+00:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="160" LINES="29"]
+[0;32m@MatOdel [0m➜ [1;34m/workspaces/csci-330-homeworks-MatOdel/Hwork3 [0;36m([1;31mmain[0;36m) [0m$ sbcl
+This is SBCL 1.4.3, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+* (print (mergesort '(12 3 23 5 34 34)))                                      (defun partition (list)
+  "splits list into two"
+  (labels ((partitionI (list L R toggle) ; definition of recursive function; toggle creates the every other effect
+             (cond ((null list) (list (reverse L) (reverse R)))  ; if the list is empty return back L and R ; end of recursion
+                   (toggle (partitionI (cdr list) L (cons (car list) R) nil)) ; if toggle is set to true, then add to R;toggle swithces
+                   (t (partitionI (cdr list) (cons (car list) L) R t))))) ; if toggle is set false, then add to L ;toggle switches
+    (partitionI list '() '() t))) ; Inital call of recursive function
+
+(defun mergeLR (L R)
+
+PARTITION
+*   "Merges two lists and "
+  (cond ((null L) R) ; if L is empty R is returned
+        ((null R) L) ; if R is empty L is returned
+        ((<= (car L) (car R)) (cons (car L) (mergeLR (cdr L) R)))
+        (t (cons (car R) (mergeLR L (cdr R)))))) ; calls merge recursivly looking at the first member of each
+;list and adding it into the meged list
+
+
+
+(de
+MERGELR
+* fun mergesort (list)
+  "merge sorting algoritum"
+  (if (or (null list) (null (cdr list))) ;if the list is empty or only contains one elm it is returned as no sort is needed
+      list
+      (let* ((LR (partition list)) ; takes the list and partitions it and places that value in LR
+             (L (car LR))	; puts the left list in L and right in R
+             (R (cadr LR)))
+        (mergeLR (mergesort L) (mergesort R))))) ; merge is called to merge the results of mergesort on the left and right
+
+MERGESORT
+* 
+
+
+;; Example usage
+(print (mergesort '(12 3 23 5 34 34)))
+
+(3 5 12 23 34 34) 
+(3 5 12 23 34 34)
+* (exit)
+[0;32m@MatOdel [0m➜ [1;34m/workspaces/csci-330-homeworks-MatOdel/Hwork3 [0;36m([1;31mmain[0;36m) [0m$ exit
+exit
+
+Script done on 2025-02-19 01:28:54+00:00 [COMMAND_EXIT_CODE="0"]

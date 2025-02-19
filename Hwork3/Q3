@@ -1,0 +1,96 @@
+Script started on 2025-02-19 02:44:08+00:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="160" LINES="22"]
+[0;32m@MatOdel [0m➜ [1;34m/workspaces/csci-330-homeworks-MatOdel/Hwork3 [0;36m([1;31mmain[0;36m) [0m$ sbcl
+This is SBCL 1.4.3, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+* (defun pair-up (lst)
+  "Partitions the list into sorted pairs. This function takes a list and groups adjacent
+   elements into pairs, ensuring that each pair is sorted in ascending order. If the list
+   has an odd number of elements, the last element is placed in its own singleton list."
+  (cond ((null lst) '())  ;; Base case: if the list is empty, return an empty list.
+        ((null (cdr lst)) (list (list (car lst))))  ;; If one element remains, wrap it in a list.
+        (t (cons (let ((a (car lst)) (b (cadr lst)))
+                   (if (< a b) (list a b) (list b a)))  ;; Create sorted pairs.
+                 (pair-up (cddr lst))))))  ;; Recurse on the rest of the list, skipping the paired elements.
+
+(defun merge-pairs (lst)
+  "Merges a
+PAIR-UP
+* djacent lists in a bottom-up manner without using a separate merge function.
+   This function repeatedly combines adjacent lists in the given list of lists."
+  (cond ((null lst) '())  ;; Base case: if the list is empty, return empty.
+        ((null (cdr lst)) lst)  ;; If only one sublist remains, return it.
+        (t (cons (combine (car lst) (cadr lst))  ;; Merge the first two lists and continue.
+                 (merge-pairs (cddr lst))))))  ;; Recurse on the remaining lists.
+
+(defun combine (; in: DEFUN MERGE-PAIRS
+;     (COMBINE (CAR LST) (CADR LST))
+; 
+; caught STYLE-WARNING:
+;   undefined function: COMBINE
+; 
+; compilation unit finished
+;   Undefined function:
+;     COMBINE
+;   caught 1 STYLE-WARNING condition
+
+MERGE-PAIRS
+* lst1 lst2)
+  "Merges two sorted lists into a single sorted list.
+   This function performs a classic merge operation used in merge sort."
+  (cond ((null lst1) lst2)  ;; If the first list is empty, return the second list.
+        ((null lst2) lst1)  ;; If the second list is empty, return the first list.
+        ((< (car lst1) (car lst2))  ;; Compare the first elements of both lists.
+         (cons (car lst1) (combine (cdr lst1) lst2)))  ;; Take the smaller element and recurse.
+        (t (cons (car lst2) (combine lst1 (cdr lst2))))))  ;; Otherwise, take the element from lst2.
+
+(defun bottom-up-
+COMBINE
+* mergesort (lst)
+  "Sorts a list using the bottom-up merge sort algorithm.
+   This function first groups elements into sorted pairs, then repeatedly merges
+   adjacent lists until only one sorted list remains."
+  (let ((sublists (pair-up lst)))  ;; Step 1: Create initial sorted sublists.
+    (loop while (> (length sublists) 1) do  ;; Continue merging while more than one sublist remains.
+          (setf sublists (merge-pairs sublists)))  ;; Replace sublists with their merged versions.
+    (car sublists)))  ;; The last remaining sublist is the sorted list.
+
+
+(print (bottom-up-mergesort '(12 23 84
+BOTTOM-UP-MERGESORT
+*  3 4 23 32 1 5)))  
+
+(1 3 4 5 12 23 23 32 84) 
+(1 3 4 5 12 23 23 32 84)
+* (euxt   ixt)
+; in: EIXT
+;     (EIXT)
+; 
+; caught STYLE-WARNING:
+;   undefined function: EIXT
+; 
+; compilation unit finished
+;   Undefined function:
+;     EIXT
+;   caught 1 STYLE-WARNING condition
+
+debugger invoked on a UNDEFINED-FUNCTION in thread
+#<THREAD "main thread" RUNNING {9461061}>:
+  The function COMMON-LISP-USER::EIXT is undefined.
+
+Type HELP for debugger help, or (SB-EXT:EXIT) to exit from SBCL.
+
+restarts (invokable by number or by possibly-abbreviated name):
+  0: [ABORT] Exit debugger, returning to top level.
+
+("undefined function")
+0] (eix  xit)
+; No debug variables for current frame: using EVAL instead of EVAL-IN-FRAME.
+[0;32m@MatOdel [0m➜ [1;34m/workspaces/csci-330-homeworks-MatOdel/Hwork3 [0;36m([1;31mmain[0;36m) [0m$ exit
+exit
+
+Script done on 2025-02-19 02:44:36+00:00 [COMMAND_EXIT_CODE="0"]

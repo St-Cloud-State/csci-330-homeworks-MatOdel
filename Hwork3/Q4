@@ -1,0 +1,57 @@
+Script started on 2025-02-19 02:56:45+00:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="160" LINES="22"]
+[0;32m@MatOdel [0m➜ [1;34m/workspaces/csci-330-homeworks-MatOdel/Hwork3 [0;36m([1;31mmain[0;36m) [0m$ sbcl
+This is SBCL 1.4.3, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+* (defun insert-sorted (item sorted-list)
+  "Inserts an item into a sorted list while maintaining ascending order."
+  (cond ((null sorted-list) 
+         ;; If the sorted-list is empty, create a new list with the item.
+         (list item))  
+        ((<= item (car sorted-list)) 
+         ;; If the item is smaller than or equal to the first element in the sorted-list,
+         ;; insert the item at the front of the list.
+         (cons item sorted-list))  
+        (t 
+         ;; Otherwise, keep the first element and recursively insert the item in the rest of the list.
+         (cons (car sorted-list) 
+               (insert-sorted item (cdr sorted-list))))))
+
+(defun sort-helper (unsorted-list
+INSERT-SORTED
+*  sorted-list)
+  "Helper function for insertion sort.
+   Recursively moves elements from unsorted-list to sorted-list in order."
+  (if (null unsorted-list)  
+      ;; Base case: If there are no more items in the unsorted-list, return the sorted-list.
+      sorted-list
+      ;; Recursive case: Take the first element from unsorted-list, 
+      ;; insert it into the sorted-list, and repeat the process with the rest of the unsorted-list.
+      (sort-helper (cdr unsorted-list) 
+                   (insert-sorted (car unsorted-list) sorted-list))))
+
+(d
+SORT-HELPER
+* efun insertion-sort (list-to-sort)
+  "Sorts a list using the insertion sort algorithm.
+   Calls sort-helper to process the list."
+  (sort-helper list-to-sort '()))  
+  ;; Initially, pass an empty list
+INSERTION-SORT
+*  as sorted-list, and the unsorted list as the input.
+
+
+(print (insertion-sort '( 14 5 3 212 32 4 5 92 23 45 32 21 100)))
+
+
+(3 4 5 5 14 21 23 32 32 45 92 100 212) 
+(3 4 5 5 14 21 23 32 32 45 92 100 212)
+* (exit)
+[0;32m@MatOdel [0m➜ [1;34m/workspaces/csci-330-homeworks-MatOdel/Hwork3 [0;36m([1;31mmain[0;36m) [0m$ exit
+exit
+
+Script done on 2025-02-19 02:57:08+00:00 [COMMAND_EXIT_CODE="0"]
