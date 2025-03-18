@@ -1,0 +1,436 @@
+Script started on 2025-03-18 23:45:56+00:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="160" LINES="34"]
+[0;32m@MatOdel [0m➜ [1;34m/workspaces/csci-330-homeworks-MatOdel [0;36m([1;31mmain[0;36m) [0m$ sbcl
+This is SBCL 1.4.3, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+* (defun Gfn (str)
+  (print '(in Gfn)) (print str)
+  (cond ((member (car str) '(x y z w)) (cdr str))
+        (t (append (cdr str) (list 'err)))))
+
+(defu
+GFN
+* n L1fn (str)
+  (print '(in L1fn)) (print str)
+  (cond ((eql (car str) 's) (L1fn (cdr str)))
+        (t str))) ;; epsilon case
+
+(defun Lfn (str)
+  (pri
+L1FN
+* nt '(in Lfn)) (print str)
+  (cond ((eql (car str) 's) (L1fn (cdr str)))
+        (t (append (cdr str) (list 'err)))))
+
+(defun Sfn (str)
+  (print '(in S
+LFN
+* fn)) (print str)
+  (cond ((eql (car str) 's) (cdr str))
+        ((eql (car str) 'd) 
+         (setq x (Lfn (cdr str)))  ; Use `setq` instead of `setf`
+         (cond ((null x) (append (cdr str) (list 'err)))
+               ((eql (car x) 'b) (cdr x))
+               (t (append (cdr str) (list 'err))))) 
+        (t (append (cdr str) (list 'err)))))
+
+(; in: DEFUN SFN
+;     (SETQ X (LFN (CDR STR)))
+; 
+; caught WARNING:
+;   undefined variable: X
+; 
+; compilation unit finished
+;   Undefined variable:
+;     X
+;   caught 1 WARNING condition
+
+SFN
+* defun E1fn (str)
+  (print '(in E1fn))
+  (print str)
+  (cond 
+   ((eql (car str) 'o) (E1fn (Gfn (cdr str))))
+   (t str)))
+
+(defun Efn (str)
+  (print '(
+E1FN
+* in Efn)) 
+  (print str)
+  (cond ((member (car str) '(x y z w)) (E1fn (Gfn str)))
+        (t (append (cdr str) (list 'err)))))  
+
+
+(defun I1fn (str)
+  
+EFN
+* (print '(in I1fn)) (print str)
+  (cond ((eql (car str) 'e) (Sfn (cdr str)))
+        (t str))) ;; epsilon case
+
+(defun Ifn (str)
+  (print '(in Ifn)) (p
+I1FN
+* rint str)
+  (cond ((eql (car str) 'i) (setq x (I1fn (Sfn (Efn (cdr str)))))
+                          (cond ((not (null x)) (append (cdr str) (list 'err)))))                             
+        (t (append (cdr str) (list 'err)))))
+; in: DEFUN IFN
+;     (SETQ X (I1FN (SFN (EFN #))))
+; 
+; caught WARNING:
+;   undefined variable: X
+; 
+; compilation unit finished
+;   Undefined variable:
+;     X
+;   caught 1 WARNING condition
+
+IFN
+* ;in gramer
+
+;
+
+
+sdf
+
+debugger invoked on a UNBOUND-VARIABLE in thread
+#<THREAD "main thread" RUNNING {9461061}>:
+  The variable SDF is unbound.
+
+Type HELP for debugger help, or (SB-EXT:EXIT) to exit from SBCL.
+
+restarts (invokable by number or by possibly-abbreviated name):
+  0: [ABORT] Exit debugger, returning to top level.
+
+(SB-INT:SIMPLE-EVAL-IN-LEXENV SDF #<NULL-LEXENV>)
+0] (Ifn '(i x o x s))
+(Ifn '(i y o w o x d s s b))
+(I
+(IN IFN) 
+(I X O X S) 
+(IN EFN) 
+(X O X S) 
+(IN GFN) 
+(X O X S) 
+(IN E1FN) 
+(O X S) 
+(IN GFN) 
+(X S) 
+(IN E1FN) 
+(S) 
+(IN SFN) 
+(S) 
+(IN I1FN) 
+
+NILNIL 
+0] 
+(IN IFN) 
+(I Y O W O X D S S B) 
+(IN EFN) 
+(Y O W O X D S S B) 
+(IN GFN) 
+(Y O W O X D S S B) 
+(IN E1FN) 
+(O W O X D S S B) 
+(IN GFN) 
+(W O X D S S B) 
+(IN E1FN) 
+(O X D S S B) 
+(IN GFN) 
+(X D S S B) 
+(IN E1FN) 
+(D S S B) 
+(IN SFN) 
+(D S S B) 
+(IN LFN) 
+(S S B) 
+(IN L1FN) 
+(S B) 
+(IN L1FN) 
+(B) 
+(IN I1FN) 
+
+NILNIL 
+0] fn '(i x o w s e s))
+(Ifn '(i z o z o z d s s b e 
+(IN IFN) 
+(I X O W S E S) 
+(IN EFN) 
+(X O W S E S) 
+(IN GFN) 
+(X O W S E S) 
+(IN E1FN) 
+(O W S E S) 
+(IN GFN) 
+(W S E S) 
+(IN E1FN) 
+(S E S) 
+(IN SFN) 
+(S E S) 
+(IN I1FN) 
+(E S) 
+(IN SFN) 
+
+NIL(S) 
+0] d s s b))
+(Ifn '(i w d s s b))
+(Ifn '(i x d s b))
+
+(IN IFN) 
+(I Z O Z O Z D S S B E D ...) 
+(IN EFN) 
+(Z O Z O Z D S S B E D S ...) 
+(IN GFN) 
+(Z O Z O Z D S S B E D S ...) 
+(IN E1FN) 
+(O Z O Z D S S B E D S S ...) 
+(IN GFN) 
+(Z O Z D S S B E D S S B) 
+(IN E1FN) 
+(O Z D S S B E D S S B) 
+(IN GFN) 
+(Z D S S B E D S S B) 
+(IN E1FN) 
+(D S S B E D S S B) 
+(IN SFN) 
+(D S S B E D S S B) 
+(IN LFN) 
+(S S B E D S S B) 
+(IN L1FN) 
+(S B E D S S B) 
+(IN L1FN) 
+(B E D S S B) 
+(IN I1FN) 
+(E D S S B) 
+(IN SFN) 
+(D S S B) 
+(IN LFN) 
+(S S B) 
+(IN L1FN) 
+(S B) 
+(IN L1FN) 
+
+NIL(B) 
+0] 
+(IN IFN) 
+(I W D S S B) 
+(IN EFN) 
+(W D S S B) 
+(IN GFN) 
+(W D S S B) 
+(IN E1FN) 
+(D S S B) 
+(IN SFN) 
+(D S S B) 
+(IN LFN) 
+(S S B) 
+(IN L1FN) 
+(S B) 
+(IN L1FN) 
+(B) 
+(IN I1FN) 
+
+NILNIL 
+0] 
+(IN IFN) 
+(I X D S B) 
+(IN EFN) 
+(X D S B) 
+(IN GFN) 
+(X D S B) 
+(IN E1FN) 
+(D S B) 
+(IN SFN) 
+(D S B) 
+(IN LFN) 
+(S B) 
+(IN L1FN) 
+(B) 
+(IN I1FN) 
+
+NILNIL 
+0] (Ifn '(i y s e d s s s b))
+
+(IN IFN) 
+(I Y S E D S S S B) 
+(IN EFN) 
+(Y S E D S S S B) 
+(IN GFN) 
+(Y S E D S S S B) 
+(IN E1FN) 
+(S E D S S S B) 
+(IN SFN) 
+(S E D S S S B) 
+(IN I1FN) 
+(E D S S S B) 
+(IN SFN) 
+(D S S S B) 
+(IN LFN) 
+(S S S B) 
+(IN L1FN) 
+(S S B) 
+(IN L1FN) 
+(S B) 
+(IN L1FN) 
+
+NIL(B) 
+0] (print '(all passed))
+
+
+(ALL PASSED)(ALL PASSED) 
+0] (print '(out of grammer))
+
+
+(OUT OF GRAMMER)(OUT OF GRAMMER) 
+0] (Ifn '(i x x x s))
+(Ifn '(i y o r o x d s s b))
+(I
+(IN IFN) 
+(I X X X S) 
+(IN EFN) 
+(X X X S) 
+(IN GFN) 
+(X X X S) 
+(IN E1FN) 
+(X X S) 
+(IN SFN) 
+(X X S) 
+(IN I1FN) 
+
+(X X X S ERR)(X S ERR) 
+0] 
+(IN IFN) 
+(I Y O R O X D S S B) 
+(IN EFN) 
+(Y O R O X D S S B) 
+(IN GFN) 
+(Y O R O X D S S B) 
+(IN E1FN) 
+(O R O X D S S B) 
+(IN GFN) 
+(R O X D S S B) 
+(IN E1FN) 
+(O X D S S B ERR) 
+(IN GFN) 
+(X D S S B ERR) 
+(IN E1FN) 
+(D S S B ERR) 
+(IN SFN) 
+(D S S B ERR) 
+(IN LFN) 
+(S S B ERR) 
+(IN L1FN) 
+(S B ERR) 
+(IN L1FN) 
+(B ERR) 
+(IN I1FN) 
+
+(Y O R O X D S S B ERR)(ERR) 
+0] fn '(i x o s s e s))
+(Ifn '(i z o z o z d s s b e 
+(IN IFN) 
+(I X O S S E S) 
+(IN EFN) 
+(X O S S E S) 
+(IN GFN) 
+(X O S S E S) 
+(IN E1FN) 
+(O S S E S) 
+(IN GFN) 
+(S S E S) 
+(IN E1FN) 
+(S E S ERR) 
+(IN SFN) 
+(S E S ERR) 
+(IN I1FN) 
+(E S ERR) 
+(IN SFN) 
+
+(X O S S E S ERR)(S ERR) 
+0] d s s))
+(Ifn '(w w d s s b))
+(Ifn '(i i x d s b))
+
+(IN IFN) 
+(I Z O Z O Z D S S B E D ...) 
+(IN EFN) 
+(Z O Z O Z D S S B E D S ...) 
+(IN GFN) 
+(Z O Z O Z D S S B E D S ...) 
+(IN E1FN) 
+(O Z O Z D S S B E D S S) 
+(IN GFN) 
+(Z O Z D S S B E D S S) 
+(IN E1FN) 
+(O Z D S S B E D S S) 
+(IN GFN) 
+(Z D S S B E D S S) 
+(IN E1FN) 
+(D S S B E D S S) 
+(IN SFN) 
+(D S S B E D S S) 
+(IN LFN) 
+(S S B E D S S) 
+(IN L1FN) 
+(S B E D S S) 
+(IN L1FN) 
+(B E D S S) 
+(IN I1FN) 
+(E D S S) 
+(IN SFN) 
+(D S S) 
+(IN LFN) 
+(S S) 
+(IN L1FN) 
+(S) 
+(IN L1FN) 
+
+(Z O Z O Z D S S B E D S ...)NIL 
+0] 
+(IN IFN) 
+
+(W D S S B ERR)(W W D S S B) 
+0] 
+(IN IFN) 
+(I I X D S B) 
+(IN EFN) 
+(I X D S B) 
+(IN SFN) 
+(X D S B ERR) 
+(IN I1FN) 
+
+(I X D S B ERR)(D S B ERR ERR) 
+0] (Ifn '(i y s e d e s s b))
+
+(IN IFN) 
+(I Y S E D E S S B) 
+(IN EFN) 
+(Y S E D E S S B) 
+(IN GFN) 
+(Y S E D E S S B) 
+(IN E1FN) 
+(S E D E S S B) 
+(IN SFN) 
+(S E D E S S B) 
+(IN I1FN) 
+(E D E S S B) 
+(IN SFN) 
+(D E S S B) 
+(IN LFN) 
+
+(Y S E D E S S B ERR)(E S S B) 
+0] pirn    (print a '(all failed))
+
+
+(ALL FAILED)(ALL FAILED) 
+0] (exit)
+[0;32m@MatOdel [0m➜ [1;34m/workspaces/csci-330-homeworks-MatOdel [0;36m([1;31mmain[0;36m) [0m$ exit
+exit
+
+Script done on 2025-03-18 23:49:22+00:00 [COMMAND_EXIT_CODE="0"]
